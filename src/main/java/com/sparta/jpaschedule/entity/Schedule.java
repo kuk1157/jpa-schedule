@@ -43,10 +43,12 @@ public class Schedule extends Timestamped {
     @Comment(value = "날씨")
     private String weather;
 
+
     public Schedule(ScheduleRequestDto requestDto){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.m_id = requestDto.getM_id();
+        this.weather = requestDto.getWeather();
     }
 
     public void update(ScheduleRequestDto requestDto) {

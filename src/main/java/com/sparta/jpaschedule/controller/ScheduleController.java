@@ -46,10 +46,4 @@ public class ScheduleController {
     public Long deleteSchedule(@CookieValue(JwtUtil.AUTHORIZATION_HEADER) String tokenValue, @PathVariable Long id) {
         return scheduleService.deleteSchedule(tokenValue,id);
     }
-
-//    @GetMapping("/schedule/test")
-//    public String getApi() {
-//        return scheduleService.getApi();
-//    }
-
 }

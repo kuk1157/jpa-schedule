@@ -1,6 +1,8 @@
 package com.sparta.jpaschedule.service;
 
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.google.gson.*;
+import com.google.gson.JsonArray;
 import com.sparta.jpaschedule.dto.SchedulePagingDto;
 import com.sparta.jpaschedule.dto.ScheduleResponseDto;
 import com.sparta.jpaschedule.dto.ScheduleRequestDto;
@@ -16,12 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,14 +44,15 @@ public class ScheduleService {
 
     public ScheduleResponseDto createSchedule(Long id, ScheduleRequestDto requestDto) {
         findMember(id);
-
+        String weather = getWeatherFromApi();
+        requestDto.setWeather(weather);
         Schedule schedule = new Schedule(requestDto);
         Schedule saveSchedule = scheduleRepository.save(schedule);
         ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(saveSchedule);
         return scheduleResponseDto;
     }
 
-
+    //
     public List<ScheduleResponseDto> getSchedule() {
         return scheduleRepository.findAllBy().stream().map(ScheduleResponseDto::new).toList();
     }
@@ -105,14 +107,22 @@ public class ScheduleService {
         );
     }
 
-//    public String getApi() {
-//        String url = "https://f-api.github.io/f-api/weather.json";
-//        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-//        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
-//        return responseEntity.getBody();
-//    }
-
-
+    public String getWeatherFromApi() {
+        String url = "https://f-api.github.io/f-api/weather.json";
+        SimpleDateFormat sdf2 = new SimpleDateFormat("MM-dd");
+        Date now = new Date();
+        String nowTime = sdf2.format(now);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
+        String str = responseEntity.getBody();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonArray jsonElements = gson.fromJson(str, JsonArray.class);
+        for(JsonElement obj: jsonElements) {
+            if(obj.getAsJsonObject().get("date").getAsString().equals(nowTime)){
+                return obj.getAsJsonObject().get("weather").getAsString();
+            }
+        }
+        return "nothing";
+    }
 }
 
 
