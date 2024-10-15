@@ -2,7 +2,8 @@ package com.sparta.jpaschedule.dto;
 
 import com.sparta.jpaschedule.entity.Member;
 import lombok.Getter;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class MemberResponseDto {
@@ -12,9 +13,8 @@ public class MemberResponseDto {
     private String name;
     private String email;
     private String pw;
-    private Date reg_date;
-    private Date edit_date;
-
+    private LocalDateTime reg_date;
+    private LocalDateTime edit_date;
     public MemberResponseDto(Member member) {
         this.id = member.getId();
         this.authority_code = member.getAuthority_code();
@@ -24,5 +24,6 @@ public class MemberResponseDto {
         this.pw = member.getPw();
         this.reg_date = member.getReg_date();
         this.edit_date = member.getEdit_date();
+
     }
 }

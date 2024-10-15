@@ -3,8 +3,7 @@ import com.sparta.jpaschedule.entity.Comments;
 
 import lombok.Getter;
 
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 public class CommentsResponseDto {
@@ -13,8 +12,8 @@ public class CommentsResponseDto {
     private Long s_id;
     private String m_name;
     private String content;
-    private Date reg_date;
-    private Date edit_date;
+    private LocalDateTime reg_date;
+    private LocalDateTime edit_date;
 
     public CommentsResponseDto(Comments comments) {
         this.id = comments.getId();
