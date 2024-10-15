@@ -1,6 +1,7 @@
 package com.sparta.jpaschedule.service;
 
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.sparta.jpaschedule.dto.SchedulePagingDto;
 import com.sparta.jpaschedule.dto.ScheduleResponseDto;
 import com.sparta.jpaschedule.dto.ScheduleRequestDto;
 import com.sparta.jpaschedule.entity.Member;
@@ -49,9 +50,13 @@ public class ScheduleService {
         return scheduleResponseDto;
     }
 
-    public List<ScheduleResponseDto> getSchedule(Pageable pageable) {
-        // DB 조회
-        return scheduleRepository.findAllBy(pageable).stream().map(ScheduleResponseDto::new).toList();
+
+    public List<ScheduleResponseDto> getSchedule() {
+        return scheduleRepository.findAllBy().stream().map(ScheduleResponseDto::new).toList();
+    }
+
+    public List<SchedulePagingDto> getSchedulePaging(Pageable pageable) {
+        return scheduleRepository.findAllBy(pageable).stream().map(SchedulePagingDto::new).toList();
     }
 
     @Transactional

@@ -1,8 +1,9 @@
 package com.sparta.jpaschedule.dto;
 import com.sparta.jpaschedule.entity.Schedule;
+import com.sparta.jpaschedule.repository.PagingColumn;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 public class ScheduleResponseDto {
@@ -12,8 +13,8 @@ public class ScheduleResponseDto {
     private String title;
     private String content;
     private String weather;
-    private Date reg_date;
-    private Date edit_date;
+    private LocalDateTime reg_date;
+    private LocalDateTime edit_date;
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();

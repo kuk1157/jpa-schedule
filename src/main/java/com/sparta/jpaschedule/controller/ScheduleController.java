@@ -1,5 +1,6 @@
 package com.sparta.jpaschedule.controller;
 
+import com.sparta.jpaschedule.dto.SchedulePagingDto;
 import com.sparta.jpaschedule.dto.ScheduleRequestDto;
 import com.sparta.jpaschedule.dto.ScheduleResponseDto;
 import com.sparta.jpaschedule.jwt.JwtUtil;
@@ -7,6 +8,7 @@ import com.sparta.jpaschedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +28,13 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedule")
-    public List<ScheduleResponseDto> getSchedule(Pageable pageable) {
-        return scheduleService.getSchedule(pageable);
+    public List<ScheduleResponseDto> getSchedule() {
+        return scheduleService.getSchedule();
+    }
+
+    @GetMapping("/schedule/page")
+    public List<SchedulePagingDto> getSchedulePaging(@PageableDefault(size = 10, sort = "edit_date", direction = Sort.Direction.DESC) Pageable pageable) {
+        return scheduleService.getSchedulePaging(pageable);
     }
 
     @PutMapping("/schedule/{id}")
