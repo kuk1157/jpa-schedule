@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+// 작성일, 수정일 전체 ENTITY 에 적용
 public abstract class Timestamped {
 
     @CreatedDate

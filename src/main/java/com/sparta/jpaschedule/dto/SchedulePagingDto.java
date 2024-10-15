@@ -11,8 +11,8 @@ public class SchedulePagingDto {
     private String content;
     private LocalDateTime reg_date;
     private LocalDateTime edit_date;
-    private String memberName;
-    private int count;
+    private String memberName; // 작성자 유저명 (서브쿼리)
+    private int count; // 댓글 개수 (서브쿼리)
 
     public SchedulePagingDto(PagingColumn pagingColumn) {
         this.title = pagingColumn.getTitle();

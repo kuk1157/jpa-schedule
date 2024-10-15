@@ -23,8 +23,10 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    private final String ADMIN_TOKEN = "AAABnwioslwoekHHHTBcddeeWWSliL";
 
+    private final String ADMIN_TOKEN = "AAABnwioslwoekHHHTBcddeeWWSliL"; // 회원가입 관리자 권한 토큰값
+
+    // 유저 등록(회원가입)
     public MemberResponseDto createMember(MemberRequestDto requestDto) {
         String name = requestDto.getName();
         String email = requestDto.getEmail();
@@ -63,11 +65,13 @@ public class MemberService {
         MemberResponseDto memberResponseDto = new MemberResponseDto(saveMember);
         return memberResponseDto;
     }
-    
+
+    // 유저 조회
     public List<MemberResponseDto> getMember() {
         return memberRepository.findAllBy().stream().map(MemberResponseDto::new).toList();
     }
 
+    // 유저 수정
     @Transactional
     public Long updateMember(Long id, MemberRequestDto requestDto) {
         Member member = findMember(id);
@@ -75,18 +79,21 @@ public class MemberService {
         return id;
     }
 
+    // 유저 삭제
     public Long deleteMember(Long id) {
         Member member = findMember(id);
         memberRepository.delete(member);
         return id;
     }
 
+    // 유저 ID 조회
     private Member findMember(Long id) {
         return memberRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("선택한 유저는 존재하지 않습니다.")
         );
     }
 
+    // 로그인 기능
     public String login(LoginRequestDto loginRequestDto, HttpServletResponse res) {
         String email = loginRequestDto.getEmail();
         String pw = loginRequestDto.getPw();
@@ -99,10 +106,16 @@ public class MemberService {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
+        // 토큰 생성
         String token = jwtUtil.createToken(member.getEmail(), member.getAuthority_name());
+
+        // 토큰 저장
         jwtUtil.addJwtToCookie(token,res);
 
+        // 토큰 가공
         String tokenValue = jwtUtil.substringToken(token);
+
+        // 토큰 예외처리
         jwtUtil.validateToken(tokenValue);
 
         return "회원정보 : "+jwtUtil.getUserInfoFromToken(tokenValue)+"\n로그인 성공";

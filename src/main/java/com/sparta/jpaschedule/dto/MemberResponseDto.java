@@ -15,6 +15,7 @@ public class MemberResponseDto {
     private String pw;
     private LocalDateTime reg_date;
     private LocalDateTime edit_date;
+
     public MemberResponseDto(Member member) {
         this.id = member.getId();
         this.authority_code = member.getAuthority_code();
