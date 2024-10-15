@@ -1,0 +1,41 @@
+# [테이블 CREATE문]
+
+# 1. members 테이블 (유저테이블)
+# 기존에 사용하던 서버와 연결해뒀는데 이미 member, users 테이블을 사용중이어서 불가피하게 members로 테이블명 정했습니다.
+CREATE TABLE members(  
+id bigint(20) not null auto_increment comment '유저 고유번호',
+authority_code int(11) comment '유저 권한코드',
+authority_name varchar(10) comment '유저 권한이름',
+name varchar(45) comment '이름',
+email varchar(255) comment '이메일',
+pw varchar(255) comment '비밀번호 \n - 자동 암호화',
+reg_date datetime(6) comment '작성일\n - 작성되는 동시 자동',
+edit_date datetime(6) comment '수정일\n - 작성일과 동시에 저장',
+PRIMARY KEY(id)
+);
+
+
+# 2. schedules 테이블 (일정테이블)
+CREATE TABLE schedules(  
+id bigint(20) not null auto_increment comment '일정 고유번호',
+m_id bigint(20) comment '유저 고유번호 \n - 유저 테이블과 연동',
+m_name varchar(45) comment '작성 유저명',
+title varchar(255) not null comment '할일 제목',
+content varchar(255) not null comment '할일 내용',
+weather varchar(50) comment '날씨',
+reg_date datetime(6) comment '작성일\n - 작성되는 동시 자동',
+edit_date datetime(6) comment '수정일\n - 작성일과 동시에 저장',
+PRIMARY KEY(id), FOREIGN KEY (m_id) REFERENCES members(id)
+);
+
+# 3. comments 테이블 (일정 댓글 테이블)
+CREATE TABLE comments(  
+id bigint(20) not null auto_increment comment '댓글 고유번호',
+s_id bigint(20) comment '일정 고유번호 \n - 일정 테이블과 연동',
+m_id bigint(20) comment '유저 고유번호 \n - 유저 테이블과 연동',
+m_name varchar(45) comment '작성 유저명',
+content varchar(255) not null comment '댓글 내용',
+reg_date datetime(6) comment '작성일\n - 작성되는 동시 자동',
+edit_date datetime(6) comment '수정일\n - 작성일과 동시에 저장',
+PRIMARY KEY(id), FOREIGN KEY (s_id) REFERENCES schedules(id)
+);
