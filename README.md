@@ -1,6 +1,6 @@
 # [ Spring 개인과제_2 - 일정관리 게시판 (JPA 기반)  ]
 
-필수 레벨 0,1,2,3,4,5 : 
+필수 레벨 0,1,2,3,4,5 : https://kuk1938.tistory.com/170
 
 도전 레벨 1,2,3,4 : 
 
@@ -157,9 +157,6 @@ https://moonddev-9794.postman.co/workspace/moonddev-Workspace~c3ed51a4-6c51-4a48
 
 
 
+## API조회)
 
-
-
-
-
-
+https://github.com/user-attachments/assets/0a2a9f9a-8c3c-4ac7-b075-f9df562488c4
