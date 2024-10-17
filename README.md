@@ -2,9 +2,9 @@
 
 필수 레벨 0,1,2,3,4,5 : https://kuk1938.tistory.com/170
 
-도전 레벨 1,2,3,4 : 
+도전 레벨 1,2,3,4 : https://kuk1938.tistory.com/173
 
-트러블 슈팅 :
+트러블 슈팅 : https://kuk1938.tistory.com/172
 
 #
 
