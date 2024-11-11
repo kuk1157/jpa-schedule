@@ -1,14 +1,14 @@
-# [ Spring 개인과제_2 - 일정관리 게시판 (JPA 기반)  ]
+# 📁 [ Spring 및 JPA 기반 일정관리 시스템  ]
 
-필수 레벨 0,1,2,3,4,5 : https://kuk1938.tistory.com/170
+유저,일정,댓글 CRUD : https://kuk1938.tistory.com/170
 
-도전 레벨 1,2,3,4 : https://kuk1938.tistory.com/173
+JWT토큰 활용 및 외부API 연동 : https://kuk1938.tistory.com/173
 
 트러블 슈팅 : https://kuk1938.tistory.com/172
 
 #
 
-### 필수 레벨0 - 일정관리 설계서) 
+### 📓 전체 설계서) - ERD, API명세서
 
 ![image](https://github.com/user-attachments/assets/c7015e1b-38cf-4a40-9886-655c8e830ede)
 
@@ -34,8 +34,10 @@ https://moonddev-9794.postman.co/workspace/moonddev-Workspace~c3ed51a4-6c51-4a48
 
 
 
-# [일정관리 전체 흐름]
+# 💻 [일정관리 전체 흐름]
 : 필수,도전으로 분리하여 설명
+
+- 필수 : 유저,일정,댓글CRUD 및 페이징 / 도전 : JWT토큰 활용 및 외부API 연동
 
 ## [필수 레벨1]
 
